@@ -35,8 +35,8 @@ pip install pandas numpy scikit-learn matplotlib jupyter
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/<your-username>/<your-repo>.git
-   cd <your-repo>
+   git clone https://github.com/MohammadSameer19/Solubility-Prediction.git
+   cd Solubility-Prediction
    ```
 2. (Optional) Create and activate a virtual environment
    - Windows (PowerShell):
