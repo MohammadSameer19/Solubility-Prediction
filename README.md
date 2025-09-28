@@ -1,80 +1,124 @@
-# Solubility Prediction Model (Notebook)
+# Solubility Prediction Model
 
-A self-contained Jupyter notebook that demonstrates building and evaluating machine learning models for predicting solubility. It covers data preparation, model training, evaluation, and basic visualization.
+A machine learning web application for predicting chemical compound solubility (logS) using molecular descriptors.
+
+## Features
+
+- **Interactive Web Interface**: Built with Streamlit
+- **Multiple Input Methods**: 
+  - CSV file upload for batch predictions
+  - Manual entry for single compound prediction
+- **Machine Learning Models**: Linear Regression trained on the Delaney solubility dataset
+- **Real-time Predictions**: Get instant solubility predictions
+- **Export Results**: Download predictions as CSV files
+
+## Dataset
+
+This project uses the Delaney solubility dataset, which contains:
+- 1,144 chemical compounds
+- Molecular descriptors (features)
+- Experimental solubility values (logS target)
+
+**Source**: [Delaney Solubility Dataset on Kaggle](https://www.kaggle.com/datasets/sorkun/delaney-solubility-with-descriptors)
+
+## Installation
+
+1. Clone this repository:
+```bash
+git clone https://github.com/yourusername/solubility-prediction.git
+cd solubility-prediction
+```
+
+2. Install required packages:
+```bash
+pip install -r requirements.txt
+```
+
+3. Download the dataset:
+   - Download `delaney_solubility_with_descriptors.csv` from Kaggle
+   - Place it in the project root directory
+
+## Usage
+
+### Training the Model
+
+1. Open and run the Jupyter notebook:
+```bash
+jupyter notebook solubility-prediction-model.ipynb
+```
+
+2. Execute all cells to:
+   - Load and explore the dataset
+   - Train the Linear Regression model
+   - Save the trained model in the `artifacts/` folder
+
+### Running the Web Application
+
+```bash
+streamlit run streamlit_app.py
+```
+
+The app will open in your browser at `http://localhost:8501`
+
+### Using the Web Interface
+
+1. **Upload CSV**: 
+   - Download the template CSV
+   - Fill in molecular descriptor values
+   - Upload and get batch predictions
+
+2. **Manual Entry**:
+   - Enter values directly in the editable table
+   - Click "Predict" for instant results
+
+## Model Performance
+
+The Linear Regression model achieves:
+- Training R²: ~0.77
+- Test R²: ~0.74
+- Training MSE: ~0.55
+- Test MSE: ~0.58
 
 ## Project Structure
 
-- `solubility-prediction-model.ipynb` — main notebook with the full workflow
-
-## What’s Inside
-
-The notebook walks through:
-- Loading and preparing data with pandas
-- Train/validation split using scikit-learn
-- Training baseline and ensemble models (e.g., Linear Regression and Random Forest Regressor)
-- Evaluating performance with metrics like Mean Squared Error (MSE) and R²
-- Visualizing results with matplotlib (e.g., predicted vs. actual)
+```
+solubility-prediction/
+├── solubility-prediction-model.ipynb  # Training notebook
+├── streamlit_app.py                   # Web application
+├── requirements.txt                   # Python dependencies
+├── README.md                          # Project documentation
+├── artifacts/                         # Trained models (created after training)
+│   ├── linear_regression.joblib
+│   ├── linear_regression.skops
+│   └── feature_columns.json
+└── delaney_solubility_with_descriptors.csv  # Dataset (download separately)
+```
 
 ## Requirements
 
-- Python 3.8+
-- Jupyter Notebook or JupyterLab
-- Packages:
-  - pandas
-  - numpy
-  - scikit-learn
-  - matplotlib
+- Python 3.7+
+- pandas
+- numpy
+- scikit-learn
+- streamlit
+- matplotlib
+- joblib
+- skops
 
-Install dependencies (recommended in a virtual environment):
+## Contributing
 
-```bash
-pip install pandas numpy scikit-learn matplotlib jupyter
-```
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## Getting Started
+## License
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/MohammadSameer19/Solubility-Prediction.git
-   cd Solubility-Prediction
-   ```
-2. (Optional) Create and activate a virtual environment
-   - Windows (PowerShell):
-     ```bash
-     python -m venv .venv
-     .venv\Scripts\Activate
-     ```
-   - macOS/Linux:
-     ```bash
-     python3 -m venv .venv
-     source .venv/bin/activate
-     ```
-3. Install dependencies:
-   ```bash
-   pip install pandas numpy scikit-learn matplotlib jupyter
-   ```
-4. Launch Jupyter and open the notebook:
-   ```bash
-   jupyter notebook
-   ```
-   Then open `solubility-prediction-model.ipynb` in your browser.
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Data
+## Acknowledgments
 
-- Replace any placeholder paths in the notebook with the actual path to your dataset.
-- Ensure your dataset includes the target variable for solubility and relevant features.
-- If data is large or proprietary, do not commit it to the repository; keep it locally or use a data storage service.
-
-## Reproducibility
-
-- The notebook uses scikit-learn utilities like `train_test_split` and estimators (e.g., `LinearRegression`, `RandomForestRegressor`).
-- For consistent results across runs, set `random_state` in `train_test_split` and any stochastic models (e.g., `RandomForestRegressor(random_state=42)`).
-
-## Results
-
-- The notebook reports common regression metrics such as MSE and R².
-- It may include basic plots (e.g., predicted vs actual) to visualize model performance.
-
-## Notes
-
-- This notebook is meant as a clear, minimal starting point. You can extend it with feature engineering, hyperparameter tuning, cross-validation, and domain-specific descriptors for better accuracy.
+- Delaney et al. for the solubility dataset
+- Scikit-learn team for the machine learning library
+- Streamlit team for the web app framework
