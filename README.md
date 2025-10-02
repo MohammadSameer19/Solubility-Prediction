@@ -83,9 +83,8 @@ solubility-prediction/
 ├── cloudbuild.yaml                    # Cloud Build configuration
 ├── requirements.txt                   # Python dependencies
 ├── README.md                          # Documentation
-└── artifacts/                         # Trained models (created after training)
-    ├── linear_regression.joblib
-    └── feature_columns.json
+├── linear_regression.joblib           #Trained model
+└── feature_columns.json               #Structure of the dataset
 ```
 
 ## Model Performance
