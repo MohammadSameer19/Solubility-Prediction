@@ -1,0 +1,59 @@
+substitutions:
+  _REGION: asia-south1
+  _REPO: cloud-run
+  _SERVICE: solubility-predictor
+  _IMAGE_TAG: latest
+
+steps:
+  # Preflight debug: list workspace contents
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: bash
+    args:
+      - -lc
+      - |
+        echo "Workspace tree:" && ls -la && \
+        echo "--- artifacts/:" && (ls -la artifacts || true) && \
+        echo "--- Dockerfile:" && (sed -n '1,200p' Dockerfile || true)
+
+  # Build image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:${_IMAGE_TAG}'
+      - '.'
+
+  # Push image
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:${_IMAGE_TAG}'
+
+  # Deploy to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - '${_SERVICE}'
+      - '--image'
+      - '${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:${_IMAGE_TAG}'
+      - '--region'
+      - '${_REGION}'
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+      - '--port'
+      - '8080'
+      - '--memory'
+      - '2Gi'
+      - '--cpu'
+      - '2'
+      - '--min-instances'
+      - '0'
+      - '--max-instances'
+      - '10'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+timeout: '1200s'

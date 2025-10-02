@@ -19,30 +19,30 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
 
 # Virtual environments
 .env
 .venv
 env/
 venv/
-ENV/
-env.bak/
-venv.bak/
 
 # Jupyter Notebook
 .ipynb_checkpoints
 
-# IPython
-profile_default/
-ipython_config.py
+# IDE
+.vscode/
+.idea/
 
-# Data files (optional - comment out if you want to include your dataset)
+# OS
+.DS_Store
+Thumbs.db
+
+# Dataset (download separately)
 *.csv
-*.json
 
-# Model artifacts (optional - comment out if you want to include trained models)
-artifacts/
+# Optional: Uncomment to exclude trained models from git
+# artifacts/
+# *.joblib
 *.joblib
 *.skops
 

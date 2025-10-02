@@ -1,0 +1,15 @@
+.git
+.gitignore
+.dockerignore
+README.md
+LICENSE
+.ipynb_checkpoints
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv
+venv/
+.DS_Store
+Thumbs.db
+Thumbs.db
