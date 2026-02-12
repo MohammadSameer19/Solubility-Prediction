@@ -11,7 +11,7 @@ import sklearn
 st.set_page_config(page_title="Solubility Predictor", layout="wide")
 
 # Model location and optional remote ZIP (now using the app root)
-BASE_DIR = os.path.dirname(__file__)
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 MODEL_DIR = os.getenv("MODEL_DIR", BASE_DIR)  # default to app root
 MODEL_ZIP_URL = os.getenv("MODEL_ZIP_URL")  # renamed from ARTIFACTS_ZIP_URL
 
